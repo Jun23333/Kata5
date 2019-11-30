@@ -5,10 +5,11 @@
  */
 package kata5;
 
+import view.DataBase;
 import java.io.File;
 import java.util.List;
-import model.Mail;
-import view.MailReader;
+import model.*;
+import view.*;
 
 /**
  *
@@ -24,11 +25,12 @@ public class Kata5 {
         DataBase db = new DataBase(URL);
         String file = new String("C:\\Users\\Usuario\\Documents\\NetBeansProjects\\jun\\Kata5\\EMAIL.txt");
         List<Mail> mailList = MailReader.read(file);
+        String mailTable = MailTableBuilder.build("GMAIL");
         
         db.open();
-        db.selectAll();
-        db.createTableMail("GMAIL");
-        db.addToTable("GMAIL", mailList);
+        db.selectAllPeople();
+        db.addTable(mailTable);
+        db.addMailToTable("GMAIL", mailList);
         db.close();
     }
     

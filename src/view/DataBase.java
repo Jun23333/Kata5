@@ -1,4 +1,4 @@
-package kata5;
+package view;
 
 import java.io.File;
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.List;
 import model.*;
 
-class DataBase {
+public class DataBase {
     private String URL;
     private Connection connection = null;
     
@@ -17,7 +17,7 @@ class DataBase {
         this.URL = URL;
     }
 
-    void open() {
+    public void open() {
         try {
             this.connection = DriverManager.getConnection(this.URL);
             System.out.println("OPEN");
@@ -26,7 +26,7 @@ class DataBase {
         }
     }
 
-    void close() {
+    public void close() {
         try {
             if(this.connection != null)  {
                 this.connection.close();
@@ -37,7 +37,7 @@ class DataBase {
         }
     }
     
-    public void selectAll(){
+    public void selectAllPeople(){
     String sql = "SELECT * FROM PEOPLE";
         try (Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql)){
@@ -53,12 +53,17 @@ class DataBase {
         }
     }
 
-    void createTableMail(String tableName) {
-        CreateTable newTable = new CreateMailTable(connection, tableName);
-        newTable.create();
+    public void addTable(String tableName) {
+        try (Statement stmt = connection.createStatement()) {
+            // Se crea la nueva tabla
+            stmt.execute(tableName);
+            System.out.println("Tabla creada");
+        } catch (SQLException e) {
+            System.out.println("No se ha podido crear la tabla");
+        } 
     }
-
-    void addToTable(String tableName, List<Mail> mailList) {
+    
+    public void addMailToTable(String tableName, List<Mail> mailList) {
         String sql;
         for (Mail mail : mailList) {
             sql = "INSERT INTO "+tableName+"(direccion) VALUES ('"+mail.getDomain()+"')";

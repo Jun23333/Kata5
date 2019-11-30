@@ -15,7 +15,6 @@ public class MailReader {
         List<Mail> list = new ArrayList<>();
         try{
             BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
-
             while (true) {
                 String line = reader.readLine();
                 if(line == null) break;
