@@ -1,4 +1,4 @@
-package view;
+package kata5;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -52,10 +52,13 @@ public class DataBase {
         }
     }
 
-    public void addTable(String tableName) {
+    public void addMailTable(String tableName) {
+        String sql = "CREATE TABLE IF NOT EXISTS "+ tableName +" (\n"
+                    + " id integer PRIMARY KEY AUTOINCREMENT,\n"
+                    + " direccion text NOT NULL);";
         try (Statement stmt = connection.createStatement()) {
             // Se crea la nueva tabla
-            stmt.execute(tableName);
+            stmt.execute(sql);
             System.out.println("Tabla creada");
         } catch (SQLException e) {
             System.out.println("No se ha podido crear la tabla");
