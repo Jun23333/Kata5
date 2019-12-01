@@ -1,4 +1,4 @@
-package kata5;
+package view;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

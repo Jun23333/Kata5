@@ -5,6 +5,7 @@
  */
 package kata5;
 
+import view.DataBase;
 import java.util.List;
 import model.*;
 import view.*;
